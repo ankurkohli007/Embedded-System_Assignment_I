@@ -28,4 +28,33 @@ Applications for embedded systems include hybrid cars, avionics, digital watches
 
 ## Tips for Writing to LCD with SPI
 
+The following power-up sequence should be observed by the user’s application firmware when writing characters to the LCD:
+
+* After any reset operation wait 1000 milliseconds to allow the LCD to begin normal opera- tion. The cursor on the LCD will be positioned at the top row on the left-most column.
+* Configure SPI1 module on your dsPIC30F device to operate in 8-bit Master mode. The serial clock may be set for any frequency up to 1 MHz.
+* To write an ASCII character to the LCD at the location pointed to by the cursor, load the SPIBUF register with the ASCII character byte.
+* After the character is displayed on the LCD, the cursor is automatically relocated to the next position on the LCD.
+* To reposition the cursor to another column on any of the two rows, write the address of the desired location to the SPIBUF register. Addresses in the first row of the LCD range from 0x80 to 0x8F, while addresses on the second row range from 0xC0 through 0xCF.
+* After 16 characters are written to the first row on the LCD, it is necessary for the user’s application to write the address 0xC0 of the second row to the SPIBUF in order to roll the cursor over to the second row.
+* The user application must wait for a minimum of (8 bits / SPI Frequency) between writing two successive characters or addresses.
+
+## Algorithm used for the accomplishment of the goal of the assignment ##
+
+```c
+void algorithm() 
+{
+tmr wait ms(TIMER2, 7);
+
+    }
+int main()
+{
+tmr setup period(TIMER1, 10); while(1)
+{
+algorithm() ;
+// code to handle the assignment tmr wait period(TIMER1);
+}
+}
+```
+
+
 
