@@ -56,5 +56,23 @@ algorithm() ;
 }
 ```
 
+## Hardware used for the assignment ## 
+
+***dsPIC30F4011 Enhanced Flash 16-bit Digital Signal Microcontroller Board*** is used for the assignment. Figure below shows microcontroller board used. 
+
+![alt text](image1.png)
+
+**Peripheral Features of the dsPIC30F4011 Microcontroller Board:
+
+* High current sink/source I/O pins: 25 mA/25 mA
+*Timer module with programmable prescaler: Five 16-bit timers/counters; optionally pair 16-bit timers into 32-bit timer modules
+*16-bit Capture input functions
+* 16-bit Compare/PWM output functions
+* 3-wire SPITM modules (supports 4 Frame modes)
+* I2CTM module supports Multi-Master/Slave mode and 7-bit/10-bit addressing
+*  2 UART modules with FIFO Buffers
+* 1 CAN modules, 2.0B compliant
+
+
 
 
