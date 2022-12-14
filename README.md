@@ -79,7 +79,7 @@ Figure above shows the **pickit3 Programmer** used to burn the code in the micro
 6. Whenever button S5 is pressed, send the current number of chars received to UART2.
 7. Whenever button S6 is pressed, clear the first row and reset the characters received counter.
 
-The code below shows the code to fulfill the aforementioned requirements.
+The code below shows the code structure used to fulfill the aforementioned requirements.
 
 ```c
 /*-----REQUIREMENT 1 LOGICAL CODE------*/
