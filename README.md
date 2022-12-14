@@ -62,7 +62,7 @@ algorithm() ;
 
 ![alt text](image1.png)
 
-**Peripheral Features of the dsPIC30F4011 Microcontroller Board:
+**Peripheral Features of the dsPIC30F4011 Microcontroller Board:**
 
 * High current sink/source I/O pins: 25 mA/25 mA
 *Timer module with programmable prescaler: Five 16-bit timers/counters; optionally pair 16-bit timers into 32-bit timer modules
