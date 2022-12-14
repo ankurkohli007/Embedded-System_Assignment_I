@@ -147,4 +147,4 @@ In this section, we will discuss about the results accomplished during the devel
 
 ![alt text](image3.png)
 
-In the above figure, first row shows the characters displayed on the first row of the LCD. First row highlights the name of the group mates such as Basit Akram as Basit, Ankur Kohli as Ankur, and Ammar Iqbal as Ammar. In the message "BasitAnkurAmmar" there are total 15 number of characters and these are the characters received through UART and displayed using SPI on LCD. These characters displayed on the second row of the LCD as displayed in figure.
+In the figure above, first row shows the characters displayed on the first row of the LCD. First row highlights the name of the group mates such as Basit Akram as Basit, Ankur Kohli as Ankur, and Ammar Iqbal as Ammar. In the message "BasitAnkurAmmar" there are total 15 number of characters and these are the characters received through UART and displayed using SPI on LCD. These characters displayed on the second row of the LCD as displayed in figure.
