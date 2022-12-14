@@ -26,6 +26,6 @@ Applications for embedded systems include hybrid cars, avionics, digital watches
 * Whenever button S5 is pressed, send the current number of chars received to UART2.
 * Whenever button S6 is pressed, clear the first row and reset the characters received counter.
 
-### Tips for Writing to LCD with SPI ###
+### Tips for Writing to LCD with SPI
 
 
