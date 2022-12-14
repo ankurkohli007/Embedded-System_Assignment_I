@@ -1,5 +1,5 @@
 [Embedded System](https://corsi.unige.it/en/off.f/2022/ins/59432?codcla=10635)<br>
-**Author:** [Ankur Kohli](https://github.com/ankurkohli007), [Ammar Iqbal](https://github.com/ammariqbal48) & [Basit Akram](https://github.com/abdulbasit656)<br>
+**Programmer:** [Ankur Kohli](https://github.com/ankurkohli007), [Ammar Iqbal](https://github.com/ammariqbal48) & [Basit Akram](https://github.com/abdulbasit656)<br>
 [M.Sc Robotics Engineering](https://corsi.unige.it/corsi/10635)<br>
 [University of Genoa (UniGe)](https://unige.it/en)<br>
 **Supervisor:** [Prof. Enrico Simetti](https://rubrica.unige.it/personale/UkNGW15g)
@@ -15,16 +15,6 @@ A microprocessor-based computer system with software that is intended to carry o
 From a single microcontroller to a group of connected processors with networks and peripherals, complexity can range from having no user interface to having intricate graphical user interfaces. Depending on the task for which it is created, an embedded system’s complexity varies greatly. 
 
 Applications for embedded systems include hybrid cars, avionics, digital watches, microwaves, and more. Embedded systems consume up to 98 percent of all produced microprocessors.
-
-## Requirements for the Assignment ##
-
-* Simulate an algorithm that needs 7 ms for its execution, and needs to work at 100 Hz.
-* Read characters from UART and display the characters received on the first row of the LCD.
-* When the end of the row has been reached, clear the first row and start writing again from the first row first column.
-* Whenever a CR ’\r’ or LF ’\n’ character is received, clear the first row.
-* On the second row, write "Char Recv: XXX", where XXX is the number of characters received from the UART2. (use sprintf(buffer, “%d”, value) to convert an integer to a string to be displayed.
-* Whenever button S5 is pressed, send the current number of chars received to UART2.
-* Whenever button S6 is pressed, clear the first row and reset the characters received counter.
 
 ## Tips for Writing to LCD with SPI
 
@@ -79,6 +69,78 @@ algorithm() ;
 
 Figure above shows the **pickit3 Programmer** used to burn the code in the microcotnroller board.
 
+## Requirements for the Assignment ##
+
+1. Simulate an algorithm that needs 7 ms for its execution, and needs to work at 100 Hz.
+2. Read characters from UART and display the characters received on the first row of the LCD.
+3. When the end of the row has been reached, clear the first row and start writing again from the first row first column.
+4. Whenever a CR ’\r’ or LF ’\n’ character is received, clear the first row.
+5. On the second row, write "Char Recv: XXX", where XXX is the number of characters received from the UART2. (use sprintf(buffer, “%d”, value) to convert an integer to a string to be displayed.
+6. Whenever button S5 is pressed, send the current number of chars received to UART2.
+7. Whenever button S6 is pressed, clear the first row and reset the characters received counter.
+
+The code below shows the code to fulfill the aforementioned requirements.
+
+```c
+/*-----REQUIREMENT 1 LOGICAL CODE------*/
+    tmr_wait_ms(2,1000);            //TIMER 1 WAIT FOR 1 SEC
+    tmr_setup_period(1,40);         //TIMER 2 SETUP FOR 40 MS  (it is not working less than 40ms)
+    
+     while (1) {
+        IEC1bits.U2RXIE = 0;
+        int read = read_buffer(&cb, &value);  //READ DATA FROM BUFFER
+        IEC1bits.U2RXIE = 1;
+        
+        if (read == 1){
+            
+            /*-----REQUIREMENT 2 LOGICAL CODE------*/
+            //code for first row 
+            move_cursor_first_row(colIndex);
+            put_char_SPI(value);                   
+            count++;
+            colIndex++;
+            
+            /*-----REQUIREMENT 3 & 4 LOGICAL CODE------*/
+            //condition to clear screen with given conditions
+            int clr = count%16;
+            if (value == '\r' || value == '\n' || clr == 0) {
+                move_cursor_first_row(0);
+                clear_LCD(0);
+                move_cursor_first_row(0);
+                //count = 0;
+                colIndex = 0;
+            }
+            
+            /*-----REQUIREMENT 5 LOGICAL CODE------*/
+            //code for second row
+            move_cursor_second_row(0);
+            sprintf(str ,"CharRecv: %d", count);
+            write_string_LCD(str);
+            
+        }
+       
+        /*-----REQUIREMENT 6 LOGICAL CODE------*/
+        if(int0 == 1){
+            U2TXREG = count;
+            int0 = 0;
+        }
+
+        /*-----REQUIREMENT 7 LOGICAL CODE------*/
+        if(int1 == 1){
+            move_cursor_first_row(0);
+            clear_LCD(0);
+            move_cursor_first_row(0);
+            count = 0;
+            colIndex = 0;
+            int1 = 0;
+        }
+        
+        tmr_wait_period(1); // wait what is needed for the next loop
+     }
+        return 0;
+}
+```
+
 ## Results ## 
 
 In this section, we will discuss about the results accomplished during the development of the code and real-time implementation on **dsPIC30f4011** board. Figure below, shows the outcomes of the task.
@@ -86,8 +148,3 @@ In this section, we will discuss about the results accomplished during the devel
 ![alt text](image3.png)
 
 In the above figure, first row shows the characters displayed on the first row of the LCD. First row highlights the name of the group mates such as Basit Akram as Basit, Ankur Kohli as Ankur, and Ammar Iqbal as Ammar. In the message "BasitAnkurAmmar" there are total 15 number of characters and these are the characters received through UART and displayed using SPI on LCD. These characters displayed on the second row of the LCD as displayed in figure.
-
-
-
-
-
