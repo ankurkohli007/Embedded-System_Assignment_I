@@ -28,24 +28,6 @@ The following power-up sequence should be observed by the user’s application f
 * After 16 characters are written to the first row on the LCD, it is necessary for the user’s application to write the address 0xC0 of the second row to the SPIBUF in order to roll the cursor over to the second row.
 * The user application must wait for a minimum of (8 bits / SPI Frequency) between writing two successive characters or addresses.
 
-## Algorithm used for the accomplishment the goal of the assignment ##
-
-```c
-void algorithm() 
-{
-tmr wait ms(TIMER2, 7);
-
-    }
-int main()
-{
-tmr setup period(TIMER1, 10); while(1)
-{
-algorithm() ;
-// code to handle the assignment tmr wait period(TIMER1);
-}
-}
-```
-
 ## Hardware used for the assignment ## 
 
 ***dsPIC30F4011 Enhanced Flash 16-bit Digital Signal Microcontroller Board*** is used for the assignment. Figure below shows microcontroller board used. 
@@ -68,6 +50,24 @@ algorithm() ;
 ![alt text](image2.png)
 
 Figure above shows the **pickit3 Programmer** used to burn the code in the microcotnroller board.
+
+## Algorithm used for the accomplishment the goal of the assignment ##
+
+```c
+void algorithm() 
+{
+tmr wait ms(TIMER2, 7);
+
+    }
+int main()
+{
+tmr setup period(TIMER1, 10); while(1)
+{
+algorithm() ;
+// code to handle the assignment tmr wait period(TIMER1);
+}
+}
+```
 
 ## Requirements for the Assignment ##
 
