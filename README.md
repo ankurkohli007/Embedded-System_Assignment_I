@@ -28,7 +28,7 @@ The following power-up sequence should be observed by the user’s application f
 * After 16 characters are written to the first row on the LCD, it is necessary for the user’s application to write the address 0xC0 of the second row to the SPIBUF in order to roll the cursor over to the second row.
 * The user application must wait for a minimum of (8 bits / SPI Frequency) between writing two successive characters or addresses.
 
-## Algorithm used for the accomplishment of the assignment goal ##
+## Algorithm used for the accomplishment the goal of the assignment ##
 
 ```c
 void algorithm() 
